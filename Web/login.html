@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <script  type="text/javascript" src="boot/jquery.min.js"></script>
+    <script  type="text/javascript" src="boot/popper.min.js"></script>
+    <script type="text/javascript" src="boot/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="boot/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
+
+</head>
+<body>
+    <div id="login">
+        <h1>Login</h1>
+            <input type="text" required="required" placeholder="用户名" name="u" id="username"></input>
+            <input type="password" required="required" placeholder="密码" name="p" id="password"></input>
+            <p id="out"></p>
+        <div style="width: 100%;text-align: center">
+            <div class="container">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="width: 200px">
+                        登录
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="user_login()">用户登录</a>
+                        <a class="dropdown-item" onclick="admin_login()">管理员登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+ <script>
+     async function user_login(){
+         let username=document.getElementById("username").value
+         let password=document.getElementById("password").value
+         let callback= await eel.user_login(username,password)()
+         console.log(callback)
+         if(callback == 'no'){
+             alert("账号或密码错误")
+         }else {
+             window.location='user_home.html'
+         }
+     }
+
+     async function admin_login(){
+         let username=document.getElementById("username").value
+         let password=document.getElementById("password").value
+         let callback= await eel.admin_login(username,password)()
+         if(callback == 'no'){
+             alert("账号或密码错误")
+         }else {
+             window.location='admin_home.html'
+         }
+     }
+
+
+</script>
+</body>
+</html>
