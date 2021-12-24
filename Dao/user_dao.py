@@ -80,5 +80,4 @@ def user_delete(id):
 
 
 if __name__ =="__main__":
-   a=user_get_by(user.username == "123" and user.password == "123")
-   print(len(a))
+   a=user_get_byname("刘")

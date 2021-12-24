@@ -1,10 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="utf-8">
+	<title></title>
+	<!--公共的CSS-->
+	<link rel="stylesheet" type="text/css" href="username_home.css">
+
+	<script type="text/javascript" src="/eel.js"></script>
+
 </head>
 <body>
-<div>ASDASD</div>
+<div class="page-top">
+	<div class="container">
+	</div>
+	</div>
+</div>
+导航
+<div class="page-nav">
+	<div class="container">
+
+		<!--搜索框-->
+		<div class="search">
+				<input type="text" name="" class="q" id="ser">
+				<input type="submit" class="btn" name="" value="" onclick="search()">
+				<div class="tags">
+				</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- 大内容区-->
+<div class="idx-container">
+	<div class="container">
+		<!-- 手机 -->
+		<div class="idx-title">
+			<h2 class="tit">无敌商城</h2>
+			<a class="see-all" href="">查看全部</a>
+		</div>
+
+		<div class="good-box col-5" id="databox">
+		</div>
+		</div>
+	</div>
+</div>
+
+<!-- 侧边栏-->
+<ul class="page-slider">
+
+	<li>
+		<img  src="img/user1.png" class="imgf">
+		<img src="img/user2.png" class="imgf imgs">
+		<span>个人中心</span>
+
+	</li>
+	<li>
+
+		<img src="img/car1.png" class="imgf">
+		<img src="img/car2.png" class="imgf imgs">
+		<span>购物车</span>
+
+	</li>
+	<li>
+
+		<img src="img/server1.png" class="imgf">
+		<img src="img/server2.png" class="imgf imgs">
+		<span>返回顶部</span>
+
+	</li>
+</ul>
+
+<script>
+
+
+	async function search(){
+		var name =document.getElementById("ser").value
+		let da=await eel.com_get_byname(name)()
+		var databox =document.getElementById("databox")
+
+		var data=JSON.parse(da)
+
+		databox.innerHTML="";
+			for( let i in data){
+			let div = document.createElement("div")
+			div.classList.add("phoneli","col-5")
+
+			let img = document.createElement("img")
+			img.src=data[i].img
+			div.appendChild(img)
+
+			let h3 = document.createElement("h3")
+			h3.textContent=data[i].name
+			div.appendChild(h3)
+
+			let p =document.createElement("p")
+			p.textContent="简介："+data[i].introduce
+			div.appendChild(p)
+
+			let span = document.createElement("span")
+			span.textContent=data[i].price+"元  剩余"+data[i].number+"件"
+			div.appendChild(span)
+
+
+			databox.appendChild(div)
+
+		}
+
+	}
+
+<!--	获取所有的商品-->
+	async function com_get_all(){
+		var da=await eel.com_get_all()()
+		var databox =document.getElementById("databox")
+		var data=JSON.parse(da)
+
+
+
+		for( let i in data){
+			let div = document.createElement("div")
+			div.classList.add("phoneli","col-5")
+
+			let img = document.createElement("img")
+			img.src=data[i].img
+			div.appendChild(img)
+
+			let h3 = document.createElement("h3")
+			h3.textContent=data[i].name
+			div.appendChild(h3)
+
+			let p =document.createElement("p")
+			p.textContent="简介："+data[i].introduce
+			div.appendChild(p)
+
+			let span = document.createElement("span")
+			span.textContent=data[i].price+"元  剩余"+data[i].number+"件"
+			div.appendChild(span)
+
+
+			databox.appendChild(div)
+
+		}
+	}
+	com_get_all()
+
+</script>
 </body>
 </html>
+

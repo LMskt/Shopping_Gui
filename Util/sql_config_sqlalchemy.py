@@ -1,3 +1,5 @@
+import pymysql
+pymysql.install_as_MySQLdb()
 from sqlalchemy import create_engine, Integer, Column, text, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 

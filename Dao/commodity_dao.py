@@ -40,6 +40,16 @@ def commodity_get_by(para):
         result=error
     return result
 
+# 根据名字磨模糊查询商品
+def commodity_get_byname(name):
+    try:
+        result = sesson.execute(text("SELECT * FROM COMMODITY WHERE NAME like :X "),[{"X":'%'+name+'%'}]).fetchall()
+    except:
+        result=error
+
+    return result
+
+
 
 # 添加商品
 def commodity_add(one):
@@ -51,14 +61,6 @@ def commodity_add(one):
 
     return result
 
-
-# 根据名字磨模糊查询商品
-def commodity_get_byname(name):
-    try:
-        result = sesson.execute(text("SELECT * FROM commodity WHERE NAME like :X "),[{"X":'%'+name+'%'}])
-    except:
-        result=error
-    return result
 
 
 # 修改商品
@@ -85,7 +87,7 @@ def commodity_delete(id):
 
 
 if __name__ =="__main__":
-    a = commodity_get_all()
-    for i in a:
-        print(i.name)
+    a = commodity_get_byname('龙')
+    # a=commodity_get_all()
+    print(a[0].name)
 
